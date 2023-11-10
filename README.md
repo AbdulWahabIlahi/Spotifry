@@ -49,7 +49,7 @@ https://open.spotify.com/playlist/1yjBh7deHG9Wfo4cvARfrt?si=db5c6f6e61c14dea
 ```
 4.Download some requirements 
 ```bash
-   pip install requirements.txt 
+   pip install -r requirements.txt 
    ```
 
 5. Put your desired folder to save the songs in one place
