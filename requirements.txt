@@ -1,5 +1,3 @@
-re
-requests
 spotipy
-youtubesearchpython
+youtube-search-python
 pytube
