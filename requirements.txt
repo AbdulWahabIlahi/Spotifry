@@ -1,5 +1,5 @@
 spotipy
 youtube-search-python
 pytube
-pip install requests
-pip install PyQt5
+requests
+PyQt5
