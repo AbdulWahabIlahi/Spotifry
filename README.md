@@ -25,11 +25,6 @@ Download songs from a playlist link into a folder of your choice!
 
 Don't hesitate to reach out if you need any clarification or guidance!
 
-### and put this in there:
-
-![App Screenshot](https://s4.aconvert.com/convert/p3r68-cdx67/abkpb-kkvaf.jpg)
-
-just put your credentials in their respective spaces
 
 2. ### Python
 ```
