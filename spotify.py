@@ -15,6 +15,7 @@ from PyQt5.QtWidgets import (
     QFileDialog,
 )
 import configparser
+from plyer import notification
 
 CONFIG_FILE = "config.ini"
 
@@ -47,27 +48,23 @@ class PlaylistDownloaderApp(QWidget):
 
         layout = QVBoxLayout()
 
-        # Spotify Client ID
         self.client_id_label = QLabel("Enter Spotify Client ID:")
         self.client_id_entry = QLineEdit(self)
         self.client_id_entry.setText(self.client_id)
         layout.addWidget(self.client_id_label)
         layout.addWidget(self.client_id_entry)
 
-        # Spotify Client Secret
         self.client_secret_label = QLabel("Enter Spotify Client Secret:")
         self.client_secret_entry = QLineEdit(self)
         self.client_secret_entry.setText(self.client_secret)
         layout.addWidget(self.client_secret_label)
         layout.addWidget(self.client_secret_entry)
 
-        # Playlist URL
         self.playlist_label = QLabel("Enter Spotify Playlist URL:")
         self.playlist_url_entry = QLineEdit(self)
         layout.addWidget(self.playlist_label)
         layout.addWidget(self.playlist_url_entry)
 
-        # Download Folder
         self.folder_label = QLabel("Select Download Folder:")
         self.folder_entry = QLineEdit(self)
         self.browse_button = QPushButton("Browse", self)
@@ -76,7 +73,6 @@ class PlaylistDownloaderApp(QWidget):
         layout.addWidget(self.folder_entry)
         layout.addWidget(self.browse_button)
 
-        # Download Button
         self.download_button = QPushButton("Start Download", self)
         self.download_button.clicked.connect(self.start_download)
         layout.addWidget(self.download_button)
@@ -115,7 +111,6 @@ class PlaylistDownloaderApp(QWidget):
             tracks_info.append(track_info)
         return tracks_info
 
-    
     def download_tracks(self, playlist_url, download_folder):
         tracks = self.get_playlist_info(playlist_url)
 
@@ -132,17 +127,24 @@ class PlaylistDownloaderApp(QWidget):
                 video = YouTube(url)
                 stream = video.streams.filter(only_audio=True).first()
 
-                # Fixing file path and handling invalid characters in the filename
                 filename = f"{track_info['artist_name']} - {track_info['track_title']}.mp3"
-                filename = re.sub(r'[\\/:*?"<>|]', '_', filename)  # Replace invalid characters
+                filename = re.sub(r'[\\/:*?"<>|]', '_', filename)
                 filepath = os.path.join(download_folder, filename)
 
                 stream.download(output_path=download_folder, filename=filename)
                 print(f"{filename} is downloaded")
-            except KeyError:
-                print("Unable to get the info!!")
 
-    
+                notification.notify(
+                    title="Song Downloaded",
+                    message=f"{filename} has been downloaded!",
+                    app_icon=None,
+                    timeout=10,
+                )
+            except Exception as e:
+                print(f"Error downloading {filename}: {e}")
+
+        print("Download complete.")
+
     def start_download(self):
         self.client_id = self.client_id_entry.text().strip()
         self.client_secret = self.client_secret_entry.text().strip()
