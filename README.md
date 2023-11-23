@@ -40,7 +40,7 @@ Don't hesitate to reach out if you need any clarification or guidance!
 
 3. Find your desired playlist to check this[ just for the test there is a playlist link ]
 ```bash 
-https://open.spotify.com/playlist/1yjBh7deHG9Wfo4cvARfrt?si=db5c6f6e61c14dea
+https://open.spotify.com/playlist/0dDj6l6mhSTi2HjDB8jbdg?si=cf259aa75d854cf5
 ```
 4.Download some requirements 
 ```bash
